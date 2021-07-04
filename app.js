@@ -7,26 +7,26 @@ const hexInput = document.querySelector('.hex');
 
 rgbInput.addEventListener('keyup', () => {
     const color = formatRGB(rgbInput.value);
-    const isColor = isValidColor(color);  // body.style.backgroundColor = hex;
+    const isColor = isValidColor(color);
 
     if (isColor) {
         const hex = RGBToHex(color);
+        body.style.backgroundColor = hex;
         hexInput.value = hex;
     }
 });
 
+
 hexInput.addEventListener('keyup', () => {
     const color = formatHEX(hexInput.value);
-    const isColor = isValidColor(color);  // body.style.backgroundColor = rgb;
+    const isColor = isValidColor(color);
 
     if (isColor) {
         const rgb = hexToRGB(color);
+        body.style.backgroundColor = rgb;
         rgbInput.value = rgb;
     }
 });
-
-
-
 
 
 function RGBToHex(rgb) {
@@ -63,6 +63,7 @@ function hexToRGB(hex) {
     return `rgb(${+r},${+g},${+b})`;
 };
 
+
 function formatRGB(text) {
     let [r, g, b] = text.split(',').filter(c => parseInt(c));
     return `rgb(${r}, ${g}, ${b})`;
@@ -75,6 +76,7 @@ function formatHEX(text) {
 
 
 function isValidColor(color) {
-    body.style.backgroundColor = color;
-    return body.style.backgroundColor ? true : false;
+    const el = document.createElement('div');
+    el.style.backgroundColor = color;
+    return el.style.backgroundColor ? true : false;
 };
