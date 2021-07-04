@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #000;
+    margin: 0 2%;
+}
+
+.box{
+    display: flex;
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.box div{
+    padding: 1rem;
+}
+
+.box div input{
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    outline: none;
+}
+
+@media screen and (max-width: 768px){
+    .box{
+        flex-direction: column;
+    }
+}
