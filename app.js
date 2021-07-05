@@ -8,10 +8,10 @@ const hexInput = document.querySelector('.hex');
 rgbInput.addEventListener('keyup', () => {
     const color = formatRGB(rgbInput.value);
     const isColor = isValidColor(color);
-
+    console.log(color);
     if (isColor) {
         const hex = RGBToHex(color);
-        body.style.backgroundColor = hex;
+        body.style.backgroundColor = color;
         hexInput.value = hex;
     }
 });
@@ -23,14 +23,18 @@ hexInput.addEventListener('keyup', () => {
 
     if (isColor) {
         const rgb = hexToRGB(color);
-        body.style.backgroundColor = rgb;
+        body.style.backgroundColor = color;
         rgbInput.value = rgb;
     }
 });
 
 
 function RGBToHex(rgb) {
-    let [r, g, b] = rgbInput.value.split(',').filter(c => parseInt(c));
+    let [r, g, b] = rgb
+        .split('')
+        .filter(c => !isNaN(c) || c === ',')
+        .join('')
+        .split(',');
 
     r = Number(r).toString(16);
     g = Number(g).toString(16);
@@ -47,13 +51,11 @@ function RGBToHex(rgb) {
 function hexToRGB(hex) {
     let r = 0, g = 0, b = 0;
 
-    // 3 digits
     if (hex.length == 4) {
         r = "0x" + hex[1] + hex[1];
         g = "0x" + hex[2] + hex[2];
         b = "0x" + hex[3] + hex[3];
 
-        // 6 digits
     } else if (hex.length == 7) {
         r = "0x" + hex[1] + hex[2];
         g = "0x" + hex[3] + hex[4];
@@ -65,7 +67,12 @@ function hexToRGB(hex) {
 
 
 function formatRGB(text) {
-    let [r, g, b] = text.split(',').filter(c => parseInt(c));
+    let [r, g, b] = text
+        .split('')
+        .filter(c => !isNaN(c) || c === ',')
+        .join('')
+        .split(',');
+
     return `rgb(${r}, ${g}, ${b})`;
 };
 
