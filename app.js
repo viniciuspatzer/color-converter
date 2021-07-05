@@ -8,7 +8,7 @@ const hexInput = document.querySelector('.hex');
 rgbInput.addEventListener('keyup', () => {
     const color = formatRGB(rgbInput.value);
     const isColor = isValidColor(color);
-    console.log(color);
+
     if (isColor) {
         const hex = RGBToHex(color);
         body.style.backgroundColor = color;
